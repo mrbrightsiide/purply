@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import NextAuth from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
-import { pages } from 'next/dist/build/templates/app-page';
 
 const snsLogin = async ({ account, user }: { account: any; user: any }) => {
   console.log('account', account);
@@ -11,10 +10,11 @@ const snsLogin = async ({ account, user }: { account: any; user: any }) => {
 };
 
 export const authOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     KakaoProvider({
-      clientId: 'b4ec8ed525cab721bc83e1cc89f16d98',
-      clientSecret: '27VdgrydcuWkR0I8VwS6VE2B9REmzKS9',
+      clientId: process.env.KAKAO_CLIENT_ID as string,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET as string,
     }),
   ],
   callbacks: {
