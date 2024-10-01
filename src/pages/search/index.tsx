@@ -1,12 +1,12 @@
+'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
-'use client';
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { parseString } from 'xml2js';
 
-export default function Home() {
+export default function Search() {
   const fetchMusicSearch = async (params: {
     keyword: string;
     sr?: 'album' | 'song' | 'artist';
