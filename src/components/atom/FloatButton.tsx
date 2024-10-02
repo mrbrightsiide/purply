@@ -4,17 +4,24 @@ import styled from '@emotion/styled';
 export const FloatButton = ({
   title,
   disabled,
+  bottomOffset = 10,
 }: {
   title: string;
   disabled?: boolean;
+  bottomOffset?: number;
 }) => {
-  return <Button disabled={disabled}>{title}</Button>;
+  return (
+    <Button disabled={disabled} bottomOffset={bottomOffset}>
+      {title}
+    </Button>
+  );
 };
 
-const Button = styled.button`
+const Button = styled.button<{
+  bottomOffset: number;
+}>`
   position: sticky;
-  right: 30px;
-  bottom: 30px;
+  bottom: ${({ bottomOffset }) => bottomOffset}px;
   width: 100%;
   height: 52px;
   border-radius: 100px;

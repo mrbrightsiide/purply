@@ -1,13 +1,12 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @next/next/no-img-element */
-import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { parseString } from 'xml2js';
 import { BackBtnHeader } from '@/components/atom/BackBtnHeader';
 import { FloatButton } from '@/components/atom/FloatButton';
-import { CheckBox } from '@/components/atom/CheckBox';
+import { SearchMusicCard } from '@/components/search/SearchMusicCard';
+import styled from '@emotion/styled';
 
 export default function Search() {
   const fetchMusicSearch = async (params: {
@@ -31,67 +30,61 @@ export default function Search() {
   const [selectedMusic, setSelectedMusic] = useState<any>();
 
   return (
-    <div>
+    <PageWrapper>
       <BackBtnHeader title='음악 검색' />
-      <input
-        type='text'
-        onChange={(e) => setKeyword(e.target.value)}
-        placeholder='노래제목 검색'
-      />
-      <button
-        onClick={async (e) => {
-          e.preventDefault();
-          await fetchMusicSearch({
-            keyword,
-          });
-        }}
-      >
-        검색하기
-      </button>
+      <SearchInput>
+        <input
+          type='text'
+          onChange={(e) => setKeyword(e.target.value)}
+          placeholder='추천하고 싶은 노래를 검색하세요'
+        />
+        <button
+          onClick={async (e) => {
+            e.preventDefault();
+            await fetchMusicSearch({
+              keyword,
+            });
+          }}
+        >
+          <img src='' />
+        </button>
+      </SearchInput>
       {result?.rss?.channel?.[0]?.total?.[0] === '0' && (
         <p>검색 결과가 없습니다</p>
       )}
       {result?.rss?.channel?.[0]?.item?.map((item: any, idx: any) => (
-        <React.Fragment key={idx}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              columnGap: 10,
-              marginBottom: 15,
-              cursor: 'pointer',
-            }}
-            onClick={() => setOpenIframe(openIframe === idx ? false : idx)}
-          >
-            <img
-              src={item?.['maniadb:album']?.[0]?.image?.[0]}
-              alt=''
-              width={50}
-              height={50}
-            />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <p>{item.title}</p>
-              <span>{item['maniadb:artist'][0].name}</span>
-            </div>
-            <CheckBox
-              checked={selectedMusic === idx + 1}
-              onChange={() =>
-                setSelectedMusic(selectedMusic === idx + 1 ? null : idx + 1)
-              }
-            />
-          </div>
-          {openIframe === idx && (
-            <iframe
-              src={`https://www.maniadb.com/popup/youtube/${item?.['$']?.['id']}`}
-              width='100%'
-              height={250}
-              frameBorder={0}
-            />
-          )}
-          {/* 페이징, 무한스크롤 적용할것 */}
-        </React.Fragment>
+        <SearchMusicCard
+          key={idx}
+          item={item}
+          checked={selectedMusic === idx + 1}
+          onChangeCheckBox={() =>
+            setSelectedMusic(selectedMusic === idx + 1 ? null : idx + 1)
+          }
+          openIframe={openIframe === idx}
+          onClickOpenIframe={() =>
+            setOpenIframe(openIframe === idx ? false : idx)
+          }
+        />
       ))}
+      <Space />
       <FloatButton title='선택한 음악 추가하기' disabled={!selectedMusic} />
-    </div>
+    </PageWrapper>
   );
 }
+
+const PageWrapper = styled.div`
+  padding: 0 20px;
+`;
+
+const Space = styled.div`
+  height: 20px;
+`;
+
+const SearchInput = styled.div`
+  border: 1px solid #e5e5ec;
+  border-radius: 8px;
+  padding: 14px 14px 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;

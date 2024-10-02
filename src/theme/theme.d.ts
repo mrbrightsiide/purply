@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import '@emotion/react';
 
-export const theme = {
+export const theme: Theme = {
   primary: {
     600: '#B287FF',
   },
   font: {
     gray_03: '#999999',
+    gray_02: '#767676',
   },
-} as const;
+};
 
 declare module '@emotion/react' {
   export interface Theme {
@@ -17,6 +18,7 @@ declare module '@emotion/react' {
     };
     font: {
       gray_03: '#999999';
+      gray_02: '#666666';
     };
   }
 }
