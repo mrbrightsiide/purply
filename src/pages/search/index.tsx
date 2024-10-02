@@ -5,6 +5,9 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { parseString } from 'xml2js';
+import { BackBtnHeader } from '@/components/atom/BackBtnHeader';
+import { FloatButton } from '@/components/atom/FloatButton';
+import { CheckBox } from '@/components/atom/CheckBox';
 
 export default function Search() {
   const fetchMusicSearch = async (params: {
@@ -25,20 +28,23 @@ export default function Search() {
   const [keyword, setKeyword] = useState('');
   const [result, setResult] = useState<any>();
   const [openIframe, setOpenIframe] = useState(false);
+  const [selectedMusic, setSelectedMusic] = useState<any>();
 
   return (
     <div>
+      <BackBtnHeader title='음악 검색' />
       <input
         type='text'
         onChange={(e) => setKeyword(e.target.value)}
         placeholder='노래제목 검색'
       />
       <button
-        onClick={async () =>
+        onClick={async (e) => {
+          e.preventDefault();
           await fetchMusicSearch({
             keyword,
-          })
-        }
+          });
+        }}
       >
         검색하기
       </button>
@@ -67,6 +73,12 @@ export default function Search() {
               <p>{item.title}</p>
               <span>{item['maniadb:artist'][0].name}</span>
             </div>
+            <CheckBox
+              checked={selectedMusic === idx + 1}
+              onChange={() =>
+                setSelectedMusic(selectedMusic === idx + 1 ? null : idx + 1)
+              }
+            />
           </div>
           {openIframe === idx && (
             <iframe
@@ -76,8 +88,10 @@ export default function Search() {
               frameBorder={0}
             />
           )}
+          {/* 페이징, 무한스크롤 적용할것 */}
         </React.Fragment>
       ))}
+      <FloatButton title='선택한 음악 추가하기' disabled={!selectedMusic} />
     </div>
   );
 }
