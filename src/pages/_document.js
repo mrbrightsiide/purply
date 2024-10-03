@@ -6,8 +6,10 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link
-            href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'
             rel='stylesheet'
+            as='style'
+            crossorigin
+            href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css'
           />
         </Head>
         <body>

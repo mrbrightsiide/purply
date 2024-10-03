@@ -68,6 +68,7 @@ const Title = styled.p`
   font-size: 16px;
   font-weight: 600;
   color: #171717;
+  font-weight: ${({ theme }) => theme.fontWeight.semiBold};
 `;
 
 const Wrapper = styled.div`

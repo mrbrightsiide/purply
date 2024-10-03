@@ -7,15 +7,17 @@ export const BackBtnHeader = ({
   title,
   subContent,
   onGoBack,
+  background,
 }: {
   title?: string;
   subContent?: React.ReactNode;
   onGoBack?: () => void;
+  background?: string;
 }) => {
   const router = useRouter();
 
   return (
-    <Wrapper>
+    <Wrapper background={background}>
       <BackAnchor
         css={css`
           border: 1px solid black;
@@ -48,7 +50,9 @@ const Title = styled.p`
   font-size: 20px;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{
+  background?: string;
+}>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,6 +62,7 @@ const Wrapper = styled.div`
   position: fixed;
   width: 100%;
   margin-left: -20px;
-  background-color: white;
+  background-color: ${({ background }) => (background ? background : 'white')};
   top: 0;
+  height: 56px;
 `;

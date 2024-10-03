@@ -5,9 +5,18 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const Index = () => {
-  const [title, setTitle] = useState('');
-  const [singer, setSinger] = useState('');
   const router = useRouter();
+  const {
+    title: prevTitle,
+    singer: prevSinger,
+    id: prevId,
+  } = router.query as {
+    title: string | undefined;
+    singer: string | undefined;
+    id: string | undefined;
+  };
+  const [title, setTitle] = useState(prevTitle || '');
+  const [singer, setSinger] = useState(prevSinger || '');
 
   const handleSaveClick = () => {
     if (!title || !singer) {
@@ -15,7 +24,7 @@ const Index = () => {
     }
     router.push({
       pathname: '/create_card',
-      query: { title, singer },
+      query: { title, singer, id: prevId },
     });
   };
 
@@ -31,11 +40,13 @@ const Index = () => {
           label='노래 제목'
           onChangeInput={(e) => setTitle(e.target.value)}
           placeholder='노래 제목을 입력하세요'
+          value={title}
         />
         <TextInputWithLabel
           label='가수 이름'
           placeholder='가수 이름을 입력하세요'
           onChangeInput={(e) => setSinger(e.target.value)}
+          value={singer}
         />
       </LabelWrapper>
     </PageWrapper>
@@ -46,7 +57,7 @@ export default Index;
 
 const PageWrapper = styled.div`
   padding: 0 20px;
-  margin-top: 56px;
+  padding-top: 56px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -75,4 +86,5 @@ const SaveIco = styled.button`
   background-color: transparent;
   border: none;
   color: ${({ theme }) => theme.primary[700]};
+  cursor: pointer;
 `;

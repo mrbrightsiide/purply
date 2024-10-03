@@ -20,14 +20,15 @@ export const FloatButton = ({
 const Button = styled.button<{
   bottomOffset: number;
 }>`
-  position: sticky;
+  position: fixed;
   bottom: ${({ bottomOffset }) => bottomOffset}px;
-  width: 100%;
+  width: calc(100% - 40px);
   height: 52px;
   border-radius: 100px;
   background-color: ${({ theme }) => theme.primary[600]};
-  color: white;
+  color: #222222;
   font-size: 16px;
+  font-weight: ${({ theme: { fontWeight } }) => fontWeight.medium};
   border: none;
   cursor: pointer;
 

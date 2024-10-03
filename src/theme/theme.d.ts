@@ -14,6 +14,18 @@ export const theme: Theme = {
     gray_03: '#999999',
     gray_02: '#767676',
   },
+  line: {
+    black: '#111111',
+    regular_gray: '#E5E5EC',
+  },
+  fontWeight: {
+    light: 300,
+    regular: 400,
+    medium: 500,
+    semiBold: 600,
+    bold: 700,
+    extraBold: 800,
+  },
 };
 
 declare module '@emotion/react' {
@@ -29,6 +41,18 @@ declare module '@emotion/react' {
     font: {
       gray_03: '#999999';
       gray_02: '#666666';
+    };
+    line: {
+      black: '#111111';
+      regular_gray: '#E5E5EC';
+    };
+    fontWeight: {
+      light: 300;
+      regular: 400;
+      medium: 500;
+      semiBold: 600;
+      bold: 700;
+      extraBold: 800;
     };
   }
 }
