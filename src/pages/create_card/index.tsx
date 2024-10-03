@@ -53,6 +53,11 @@ const Index = () => {
           disabled={
             !(info.user_name && info.playlist_id && info.title && info.singer)
           }
+          onClick={() => {
+            // 카드 생성 API 호출
+            // 카드 생성 성공 시, 카드 보내기 완료 페이지로 이동
+            router.push('/create_card/complete');
+          }}
         />
       </PageWrapper>
     </BG>

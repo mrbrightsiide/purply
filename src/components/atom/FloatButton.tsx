@@ -5,13 +5,22 @@ export const FloatButton = ({
   title,
   disabled,
   bottomOffset = 10,
+  onClick,
 }: {
   title: string;
   disabled?: boolean;
   bottomOffset?: number;
+  onClick: () => void;
 }) => {
   return (
-    <Button disabled={disabled} bottomOffset={bottomOffset}>
+    <Button
+      disabled={disabled}
+      bottomOffset={bottomOffset}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick();
+      }}
+    >
       {title}
     </Button>
   );
