@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IPlaylistData } from '@/utils/types';
 import { CreateForm } from '@/components/card/CreateForm';
-import { theme } from '@/theme/theme.d';
 import { ColorChip, colorChips } from '@/components/card/ColorChip';
 
 const Index = () => {

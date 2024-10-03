@@ -74,7 +74,11 @@ export default function Search() {
         </ResultBox>
       </CenterBox>
       <Space />
-      <FloatButton title='선택한 음악 추가하기' disabled={!selectedMusic} />
+      <FloatButton
+        title='선택한 음악 추가하기'
+        disabled={!selectedMusic}
+        onClick={() => {}}
+      />
     </PageWrapper>
   );
 }

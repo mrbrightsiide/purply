@@ -1,6 +1,4 @@
 import styled from '@emotion/styled';
-import { useRef } from 'react';
-import { useSwipeable } from 'react-swipeable';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
@@ -12,7 +10,7 @@ export const ColorChip = ({
   return (
     <Swiper spaceBetween={12} slidesPerView={7}>
       {colorChips.map((chip) => (
-        <SwiperSlide>
+        <SwiperSlide key={chip.name}>
           <BG
             clicked={selectedColor.name === chip.name}
             onClick={() => alert('clicked')}
