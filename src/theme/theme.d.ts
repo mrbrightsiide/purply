@@ -4,6 +4,11 @@ import '@emotion/react';
 export const theme: Theme = {
   primary: {
     600: '#B287FF',
+    700: '#9F6DF9',
+  },
+  color: {
+    black: '#000000',
+    point_red: '#FF3535',
   },
   font: {
     gray_03: '#999999',
@@ -15,6 +20,11 @@ declare module '@emotion/react' {
   export interface Theme {
     primary: {
       600: '#B287FF';
+      700: '#9F6DF9';
+    };
+    color: {
+      black: '#000000';
+      point_red: '#FF3535';
     };
     font: {
       gray_03: '#999999';

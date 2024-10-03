@@ -8,8 +8,10 @@ import { FloatButton } from '@/components/atom/FloatButton';
 import { SearchMusicCard } from '@/components/search/SearchMusicCard';
 import styled from '@emotion/styled';
 import { SearchMusicInput } from '@/components/search/SearchMusicInput';
+import { useRouter } from 'next/router';
 
 export default function Search() {
+  const router = useRouter();
   const fetchMusicSearch = async (params: {
     keyword: string;
     sr?: 'album' | 'song' | 'artist';
@@ -35,6 +37,7 @@ export default function Search() {
   return (
     <PageWrapper>
       <BackBtnHeader title='음악 검색' />
+      <Space />
       <SearchMusicInput
         onChange={(e) => setKeyword(e.target.value)}
         fetchMusicSearch={() => fetchMusicSearch({ keyword })}
@@ -48,7 +51,7 @@ export default function Search() {
         )}
         <CreateMusicBox>
           <CreateMusicTxt>노래를 직접 등록하고 싶으신가요?</CreateMusicTxt>
-          <CreateMusicBtn>
+          <CreateMusicBtn onClick={() => router.push('/search/create')}>
             <span className='icon'></span>
             <span className='title'>직접 음악 추가하기</span>
           </CreateMusicBtn>
@@ -78,9 +81,10 @@ export default function Search() {
 
 const PageWrapper = styled.div`
   padding: 0 20px;
-  min-height: 100vh;
+  min-height: calc(100vh - 56px);
   display: flex;
   flex-direction: column;
+  padding-top: 56px;
 `;
 
 const Space = styled.div`
