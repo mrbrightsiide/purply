@@ -77,7 +77,21 @@ export default function Search() {
       <FloatButton
         title='선택한 음악 추가하기'
         disabled={!selectedMusic}
-        onClick={() => {}}
+        onClick={() =>
+          router.push({
+            pathname: '/search/create',
+            query: {
+              title:
+                result?.rss?.channel?.[0]?.item?.[selectedMusic - 1]
+                  ?.title?.[0],
+              singer:
+                result?.rss?.channel?.[0]?.item?.[selectedMusic - 1]
+                  ?.artist?.[0],
+              id: result?.rss?.channel?.[0]?.item?.[selectedMusic - 1]
+                ?.maniadb_id?.[0],
+            },
+          })
+        }
       />
     </PageWrapper>
   );
