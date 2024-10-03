@@ -2,22 +2,22 @@
 import { BasicButton } from '@/components/atom/BasicButton';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import {
-  // signIn,
-  useSession,
-} from 'next-auth/react';
+// import {
+//   // signIn,
+//   // useSession,
+// } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 export default function Home() {
   const router = useRouter();
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
-  useEffect(() => {
-    if (session?.user?.name) {
-      router.push('/my_home');
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (session?.user?.name) {
+  //     router.push('/my_home');
+  //   }
+  // }, [session]);
 
   return (
     <Wrapper>
