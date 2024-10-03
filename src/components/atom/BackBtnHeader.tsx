@@ -53,6 +53,7 @@ const Title = styled.p`
 const Wrapper = styled.div<{
   background?: string;
 }>`
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,7 +61,6 @@ const Wrapper = styled.div<{
   padding: 14px 0;
   height: calc(56px - 14px * 2);
   position: fixed;
-  width: 100%;
   margin-left: -20px;
   background-color: ${({ background }) => (background ? background : 'white')};
   top: 0;
