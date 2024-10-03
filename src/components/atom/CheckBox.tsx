@@ -29,7 +29,9 @@ export const CheckBox = ({
 const Box = styled.input<{
   width: number;
   height: number;
+  checked: boolean;
 }>`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
+  background-color: ${({ checked }) => (checked ? '#FFD600' : 'skyblue')};
 `;

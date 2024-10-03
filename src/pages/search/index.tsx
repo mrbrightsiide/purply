@@ -7,6 +7,7 @@ import { BackBtnHeader } from '@/components/atom/BackBtnHeader';
 import { FloatButton } from '@/components/atom/FloatButton';
 import { SearchMusicCard } from '@/components/search/SearchMusicCard';
 import styled from '@emotion/styled';
+import { SearchMusicInput } from '@/components/search/SearchMusicInput';
 
 export default function Search() {
   const fetchMusicSearch = async (params: {
@@ -29,43 +30,46 @@ export default function Search() {
   const [openIframe, setOpenIframe] = useState(false);
   const [selectedMusic, setSelectedMusic] = useState<any>();
 
+  const noResult = result?.rss?.channel?.[0]?.total?.[0] === '0';
+
   return (
     <PageWrapper>
       <BackBtnHeader title='음악 검색' />
-      <SearchInput>
-        <input
-          type='text'
-          onChange={(e) => setKeyword(e.target.value)}
-          placeholder='추천하고 싶은 노래를 검색하세요'
-        />
-        <button
-          onClick={async (e) => {
-            e.preventDefault();
-            await fetchMusicSearch({
-              keyword,
-            });
-          }}
-        >
-          <img src='' />
-        </button>
-      </SearchInput>
-      {result?.rss?.channel?.[0]?.total?.[0] === '0' && (
-        <p>검색 결과가 없습니다</p>
-      )}
-      {result?.rss?.channel?.[0]?.item?.map((item: any, idx: any) => (
-        <SearchMusicCard
-          key={idx}
-          item={item}
-          checked={selectedMusic === idx + 1}
-          onChangeCheckBox={() =>
-            setSelectedMusic(selectedMusic === idx + 1 ? null : idx + 1)
-          }
-          openIframe={openIframe === idx}
-          onClickOpenIframe={() =>
-            setOpenIframe(openIframe === idx ? false : idx)
-          }
-        />
-      ))}
+      <SearchMusicInput
+        onChange={(e) => setKeyword(e.target.value)}
+        fetchMusicSearch={() => fetchMusicSearch({ keyword })}
+      />
+      <CenterBox align={noResult || !result ? 'center' : 'flex-start'}>
+        {noResult && (
+          <>
+            <NoResultImg />
+            <CreateMusicTxt>검색 결과가 없습니다</CreateMusicTxt>
+          </>
+        )}
+        <CreateMusicBox>
+          <CreateMusicTxt>노래를 직접 등록하고 싶으신가요?</CreateMusicTxt>
+          <CreateMusicBtn>
+            <span className='icon'></span>
+            <span className='title'>직접 음악 추가하기</span>
+          </CreateMusicBtn>
+        </CreateMusicBox>
+        <ResultBox>
+          {result?.rss?.channel?.[0]?.item?.map((item: any, idx: any) => (
+            <SearchMusicCard
+              key={idx}
+              item={item}
+              checked={selectedMusic === idx + 1}
+              onChangeCheckBox={() =>
+                setSelectedMusic(selectedMusic === idx + 1 ? null : idx + 1)
+              }
+              openIframe={openIframe === idx}
+              onClickOpenIframe={() =>
+                setOpenIframe(openIframe === idx ? false : idx)
+              }
+            />
+          ))}
+        </ResultBox>
+      </CenterBox>
       <Space />
       <FloatButton title='선택한 음악 추가하기' disabled={!selectedMusic} />
     </PageWrapper>
@@ -74,17 +78,69 @@ export default function Search() {
 
 const PageWrapper = styled.div`
   padding: 0 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Space = styled.div`
   height: 20px;
 `;
 
-const SearchInput = styled.div`
-  border: 1px solid #e5e5ec;
-  border-radius: 8px;
-  padding: 14px 14px 14px 20px;
+const CreateMusicBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px 0 24px 0;
+`;
+
+const CreateMusicTxt = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.font.gray_03};
+`;
+
+const CreateMusicBtn = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px 9px 8px 16px;
+  border: 1px solid ${({ theme }) => theme.font.gray_03};
+  border-radius: 100px;
+  margin-top: 12px;
+
+  span.icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-color: pink;
+  }
+  span.title {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.font.gray_02};
+  }
+`;
+
+const NoResultImg = styled.div`
+  width: 154px;
+  height: 87px;
+`;
+
+const CenterBox = styled.div<{
+  align: 'center' | 'flex-start' | 'flex-end';
+}>`
+  display: flex;
+  flex-direction: column;
+  justify-content: ${({ align }) => align};
+  align-items: center;
+  flex: 1;
+`;
+
+const ResultBox = styled.div`
+  width: 100%;
 `;

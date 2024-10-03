@@ -21,8 +21,8 @@ export const SearchMusicCard = ({
 }) => {
   return (
     <>
-      <Wrapper onClick={onClickOpenIframe}>
-        <CoverAndInfo>
+      <Wrapper>
+        <CoverAndInfo onClick={onClickOpenIframe}>
           <AlbumCover>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -75,7 +75,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px solid #f1f1f5;
+  border-top: 1px solid #f1f1f5;
   cursor: pointer;
 `;
 
@@ -84,6 +84,8 @@ const CoverAndInfo = styled.div`
   align-items: center;
   gap: 12px;
   justify-content: flex-start;
+  flex: 1;
+  margin-right: 20px;
 `;
 
 const Info = styled.div`
