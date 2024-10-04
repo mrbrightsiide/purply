@@ -33,7 +33,7 @@ export const SearchMusicInput = ({
           await fetchMusicSearch();
         }}
       >
-        <img src='' />
+        {/* <img src='' /> */}
       </button>
     </SearchInput>
   );

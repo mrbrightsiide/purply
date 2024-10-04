@@ -39,7 +39,6 @@ export const CreateForm = ({
           <TextInputLabel label='추천 음악' />
           <MusicWrapper>
             <AlbumCover>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={info.album_image}
                 width='100%'

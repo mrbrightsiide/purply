@@ -18,6 +18,7 @@ const Index = () => {
         {'\n'}모아 만든 플레이리스트에요
       </Desc>
       <img
+        alt=''
         css={css`
           width: 281px;
           height: 183px;

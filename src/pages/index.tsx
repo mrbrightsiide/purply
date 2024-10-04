@@ -37,6 +37,7 @@ export default function Home() {
         플레이리스트를{'\n'}만들어보아요
       </p>
       <img
+        alt='list image'
         css={css`
           width: 281px;
           height: 183px;

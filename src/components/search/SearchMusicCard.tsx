@@ -24,7 +24,6 @@ export const SearchMusicCard = ({
       <Wrapper>
         <CoverAndInfo onClick={onClickOpenIframe}>
           <AlbumCover>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={item?.['maniadb:album']?.[0]?.image?.[0]}
               width='100%'
