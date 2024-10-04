@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { TTapeColor } from '@/types/index';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
@@ -27,7 +28,10 @@ export const ColorChip = ({
   );
 };
 
-export const colorChips = [
+export const colorChips: {
+  name: TTapeColor;
+  color: string;
+}[] = [
   {
     name: 'purple',
     color: '#B287FF',

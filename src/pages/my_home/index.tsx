@@ -1,6 +1,8 @@
 import { BasicButton } from '@/components/atom/BasicButton';
 import { ColoredBackground } from '@/components/atom/ColoredBackground';
 import { colorChips } from '@/components/card/ColorChip';
+import { TapeListPreview } from '@/components/home/TapeListPreview';
+import { tapeDummyData } from '@/types';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useSession } from 'next-auth/react';
@@ -13,7 +15,7 @@ const Index = () => {
   const router = useRouter();
   const { userName } = router.query as { userName: string };
   const isMyHome = userName === session?.user?.nickname;
-  const isEmpty = true;
+  const isEmpty = false;
 
   useEffect(() => {
     if (session?.user) {
@@ -30,82 +32,86 @@ const Index = () => {
   }, [userName]);
 
   return (
-    <Wrapper>
-      <ColoredBackground color='#141414' />
+    <>
       <PaddingWrap>
         <Header>{isMyHome ? <span>home</span> : <span>로그인</span>}</Header>
         <Title>
           {userName}님의{'\n'}뮤직 보관함
         </Title>
       </PaddingWrap>
-      <Swiper
-        slidesPerView={1.14}
-        spaceBetween={20}
-        slidesOffsetAfter={20}
-        slidesOffsetBefore={20}
-      >
-        {[
-          {
-            name: '친구들이 느끼는 나의\n분위기와 어울리는 노래',
-            color: 'lime',
-            count: 0,
-            id: 1,
-          },
-          {
-            name: '친구들이 느끼는 나의\n분위기와 어울리는 노래',
-            color: 'blue',
-            count: 0,
-            id: 2,
-          },
-          {
-            name: '친구들이 느끼는 나의\n분위기와 어울리는 노래',
-            color: 'mint',
-            count: 0,
-            id: 3,
-          },
-          {
-            name: '친구들이 느끼는 나의\n분위기와 어울리는 노래',
-            color: 'purple',
-            count: 0,
-            id: 4,
-          },
-        ].map((item) => (
-          <SwiperSlide key={item.id}>
-            <Tape
-              background={
-                colorChips.find(({ name }) => name === item.color)?.color ||
-                'white'
-              }
-              onClick={() =>
-                router.push({
-                  pathname: '/my_home/detail',
-                  query: { id: item.id },
-                })
-              }
-            >
-              <TapeInfo>
-                <p>{item.name}</p>
-                <div
-                  className='count'
-                  css={css`
-                    color: ${colorChips.find(({ name }) => name === item.color)
-                      ?.color || 'black'};
-                  `}
-                >
-                  {item?.count || 0}개의 곡
-                </div>
-              </TapeInfo>
-            </Tape>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <PaddingWrap>
-        <CardListTitle>
-          <span>0</span>개의 음악 카드
-        </CardListTitle>
-        <CardList>
+      <Wrapper>
+        <ColoredBackground color='#141414' />
+        <Swiper
+          slidesPerView={1.14}
+          spaceBetween={12}
+          slidesOffsetAfter={20}
+          slidesOffsetBefore={20}
+        >
+          {[
+            {
+              name: '친구들이 느끼는 나의\n분위기와 어울리는 노래',
+              color: 'lime',
+              count: 0,
+              id: 1,
+            },
+            {
+              name: '친구들이 느끼는 나의\n분위기와 어울리는 노래',
+              color: 'blue',
+              count: 0,
+              id: 2,
+            },
+            {
+              name: '친구들이 느끼는 나의\n분위기와 어울리는 노래',
+              color: 'mint',
+              count: 0,
+              id: 3,
+            },
+            {
+              name: '친구들이 느끼는 나의\n분위기와 어울리는 노래',
+              color: 'purple',
+              count: 0,
+              id: 4,
+            },
+          ].map((item) => (
+            <SwiperSlide key={item.id}>
+              <Tape
+                background={
+                  colorChips.find(({ name }) => name === item.color)?.color ||
+                  'white'
+                }
+                onClick={() =>
+                  router.push({
+                    pathname: '/my_home/detail',
+                    query: { id: item.id },
+                  })
+                }
+              >
+                <TapeInfo>
+                  <p>{item.name}</p>
+                  <div
+                    className='count'
+                    css={css`
+                      color: ${colorChips.find(
+                        ({ name }) => name === item.color
+                      )?.color || 'black'};
+                    `}
+                  >
+                    {item?.count || 0}개의 곡
+                  </div>
+                </TapeInfo>
+              </Tape>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <PaddingWrap>
+          <CardListTitle>
+            <span>
+              <span>0</span>개의 음악 카드
+            </span>
+            {!isEmpty && <span className='more'>더보기 {'>'}</span>}
+          </CardListTitle>
           {isEmpty ? (
-            <>
+            <CardList>
               <Empty>
                 {isMyHome
                   ? '링크를 공유하고 친구에게\n음악카드를 받아보세요'
@@ -120,13 +126,13 @@ const Index = () => {
                 buttonStyle={{ width: '190px' }}
                 onClick={() => router.push('/search')}
               />
-            </>
+            </CardList>
           ) : (
-            <></>
+            <TapeListPreview data={tapeDummyData} />
           )}
-        </CardList>
-      </PaddingWrap>
-    </Wrapper>
+        </PaddingWrap>
+      </Wrapper>
+    </>
   );
 };
 
@@ -162,6 +168,7 @@ const Header = styled.div`
 
 const PaddingWrap = styled.div`
   padding: 0 20px;
+  margin-bottom: 15px;
 `;
 
 const CardList = styled.div`
@@ -175,11 +182,21 @@ const CardList = styled.div`
   align-items: center;
 `;
 
-const CardListTitle = styled.h2`
+const CardListTitle = styled.div`
   font-size: 18px;
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   color: ${({ theme }) => theme.font.gray_04};
   margin-top: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span.more {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: ${({ theme }) => theme.fontWeight.regular};
+    color: ${({ theme }) => theme.font.gray_04};
+  }
 `;
 
 const Empty = styled.div`
@@ -204,6 +221,9 @@ const TapeInfo = styled.div`
     white-space: pre-line;
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     line-height: 24px;
+    color: #161616;
+    font-size: 16px;
+    margin-bottom: -5px;
   }
   .count {
     background-color: #141414;
