@@ -35,6 +35,7 @@ export interface ITape {
   is_read: boolean;
   created_at: string;
   color: TTapeColor;
+  album_cover_url: string;
 }
 
 export interface ITapeResponse {
@@ -55,6 +56,8 @@ export const tapeDummyData: ITape[] = [
     is_read: false,
     created_at: '2024-10-03T01:57:35.070176Z',
     color: 'pink',
+    album_cover_url:
+      'https://visla.kr/wp/wp-content/uploads/2022/11/210260257_492056461875169_1648387615546901397_n.jpg',
   },
   {
     id: 2,
@@ -65,9 +68,11 @@ export const tapeDummyData: ITape[] = [
     youtube_url: 'https://www.youtube.com/watch?v=YSUCH6OfDNg',
     content: '사랑했나봐',
     like: 1,
-    is_read: false,
+    is_read: true,
     created_at: '2024-10-03T02:00:31.399606Z',
     color: 'skyblue',
+    album_cover_url:
+      'https://visla.kr/wp/wp-content/uploads/2022/11/210260257_492056461875169_1648387615546901397_n.jpg',
   },
   {
     id: 3,
@@ -81,6 +86,8 @@ export const tapeDummyData: ITape[] = [
     is_read: false,
     created_at: '2024-10-03T02:05:17.542127Z',
     color: 'blue',
+    album_cover_url:
+      'https://visla.kr/wp/wp-content/uploads/2022/11/210260257_492056461875169_1648387615546901397_n.jpg',
   },
   {
     id: 4,
@@ -91,9 +98,11 @@ export const tapeDummyData: ITape[] = [
     youtube_url: 'https://www.youtube.com/watch?v=0pLa8NyS4Es',
     content: '내가 너에게 들려주고 싶은 노래~',
     like: 1,
-    is_read: false,
+    is_read: true,
     created_at: '2024-10-03T02:10:13.597026Z',
     color: 'lime',
+    album_cover_url:
+      'https://visla.kr/wp/wp-content/uploads/2022/11/210260257_492056461875169_1648387615546901397_n.jpg',
   },
   {
     id: 5,
@@ -104,8 +113,23 @@ export const tapeDummyData: ITape[] = [
     youtube_url: 'tes',
     content: 'tes',
     like: 1,
-    is_read: false,
+    is_read: true,
     created_at: '2024-10-03T03:22:20.963271Z',
     color: 'grapefruit',
+    album_cover_url:
+      'https://visla.kr/wp/wp-content/uploads/2022/11/210260257_492056461875169_1648387615546901397_n.jpg',
   },
 ];
+
+export interface IPlaylist {
+  id: number;
+  user_id: number;
+  user_uuid: string;
+  playlist_title: string;
+  created_at: string;
+}
+
+export interface ITapeDetail {
+  playlist: IPlaylist;
+  recommended_songs: ITape[];
+}

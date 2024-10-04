@@ -25,8 +25,11 @@ export const TapeListPreview = ({ data }: { data: ITape[] }) => {
           }
         >
           <Shadow>
+            {!item.is_read && <UnreadDot top='12px' right='12px' />}
             <Flex>
-              <TapeImg>{<TapeSvg width='100%' height='100%' />}</TapeImg>
+              <TapeImg>
+                <TapeSvg width='100%' height='100%' />
+              </TapeImg>
               <InfoWrap>
                 <SongTitle>{item.title}</SongTitle>
                 <From>From. {item.user_name}</From>
@@ -57,6 +60,7 @@ const Shadow = styled.div`
   height: 100%;
   box-shadow: inset -2px -2px 3px #00000026;
   border-radius: 16px;
+  position: relative;
 `;
 
 const SongTitle = styled.p`
@@ -85,4 +89,18 @@ const Flex = styled.div`
 
 const InfoWrap = styled.div`
   padding: 14px 24px 16px 0;
+`;
+
+export const UnreadDot = styled.div<{
+  top: string;
+  right: string;
+}>`
+  width: 8px;
+  height: 8px;
+  background-color: #ff3535;
+  border-radius: 50%;
+  position: absolute;
+  top: ${({ top }) => top};
+  right: ${({ right }) => right};
+  z-index: 10;
 `;

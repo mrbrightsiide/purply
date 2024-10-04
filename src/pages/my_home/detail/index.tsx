@@ -5,6 +5,7 @@ import { css } from '@emotion/react';
 import { Folder } from '@/components/atom/Folder';
 import { colorChips } from '@/components/card/ColorChip';
 import { ColoredBackground } from '@/components/atom/ColoredBackground';
+import { tapeDummyData } from '@/types';
 
 const Index = () => {
   // const router = useRouter();
@@ -25,15 +26,16 @@ const Index = () => {
           css={css`
             width: 281px;
             height: 183px;
-            margin: 36px 0 71px 0;
+            /* margin: 36px 0 71px 0; */
             right: 0;
             position: absolute;
             background-color: ${colorChips.find(
               (color) => color.name === 'lime'
             )?.color};
+            z-index: -1;
           `}
         />
-        <Folder count={0} />
+        <Folder count={0} data={tapeDummyData} />
       </Wrapper>
     </>
   );
@@ -52,6 +54,7 @@ const Title = styled.h1`
 const Wrapper = styled.div`
   padding: 56px 20px 0 20px;
   white-space: pre-line;
+  overflow-y: hidden;
 `;
 
 const Desc = styled.p`
