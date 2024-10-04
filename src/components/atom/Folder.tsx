@@ -4,6 +4,7 @@ import { BasicButton } from './BasicButton';
 import { useRouter } from 'next/router';
 import { TapeListDetail } from '../home/TapeListDetail';
 import { ITape } from '@/types';
+import { usePlayListStore } from '@/stores';
 
 export const Folder = ({
   count = 0,
@@ -13,6 +14,7 @@ export const Folder = ({
   data?: ITape[];
 }) => {
   const router = useRouter();
+  const { setSort } = usePlayListStore();
 
   return (
     <>
@@ -26,12 +28,17 @@ export const Folder = ({
           left: '50%',
           transform: 'translateX(-50%)',
           overflow: 'hidden',
-          border: '1px solid red',
         }}
       >
         <FolderIndex>{count}개의 곡</FolderIndex>
         {data ? (
-          <TapeListDetail data={data} />
+          <>
+            <SortBox>
+              <span onClick={() => setSort('asc')}>오래된순</span>
+              <span>최신순</span>
+            </SortBox>
+            <TapeListDetail data={data} />
+          </>
         ) : (
           <Content>
             <Empty>
@@ -80,4 +87,16 @@ const Empty = styled.div`
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   color: #fff;
   text-align: center;
+`;
+
+const SortBox = styled.div`
+  display: flex;
+  color: #fff;
+  position: absolute;
+  top: 56px;
+  right: 20px;
+
+  > span {
+    cursor: pointer;
+  }
 `;

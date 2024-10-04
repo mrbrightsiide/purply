@@ -61,6 +61,6 @@ const Desc = styled.p`
   font-size: 16px;
   font-weight: ${({ theme }) => theme.fontWeight.regular};
   color: ${({ theme }) => theme.font.gray_04};
-  line-height: 20px;
+  line-height: 25px;
   margin-top: 8px;
 `;

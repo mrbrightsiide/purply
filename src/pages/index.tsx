@@ -3,6 +3,7 @@ import { BasicButton } from '@/components/atom/BasicButton';
 import { ColoredBackground } from '@/components/atom/ColoredBackground';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import axios from 'axios';
 import {
   signIn,
   signOut,
@@ -49,8 +50,11 @@ export default function Home() {
       />
       <BasicButton text='로그아웃' onClick={() => signOut()} />
       <BasicButton
-        onClick={() => signIn('kakao')}
-        // onClick={() => router.push('/my_home')}
+        onClick={() => {
+          axios.get('perplyapi/account/kakao/login').then((res) => {
+            console.log(res);
+          });
+        }}
         text='카카오 로그인'
         icon={
           <img

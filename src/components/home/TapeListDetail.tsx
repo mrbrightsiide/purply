@@ -50,11 +50,11 @@ const Wrapper = styled.div`
   margin: 0 auto;
   position: absolute;
   top: 0;
-  margin-top: 102px;
+  margin: 102px 20px 0 20px;
   padding-bottom: 20px;
   max-height: calc(100% - 102px);
   overflow-y: auto;
-  border: 1px solid pink;
+  /* border: 1px solid pink; */
 `;
 
 const SongTitle = styled.p`
@@ -81,6 +81,7 @@ const InfoWrap = styled.div`
   justify-content: space-between;
   align-items: space-between;
   flex-direction: column;
+  padding: 4px 3px 3px 3px;
 `;
 
 const AlbumComverBox = styled.div`

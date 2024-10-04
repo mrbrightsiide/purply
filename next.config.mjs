@@ -6,6 +6,10 @@ const nextConfig = {
         source: '/maniadbapi/:path*',
         destination: 'http://www.maniadb.com/api/:path*',
       },
+      {
+        source: '/perplyapi/:path*',
+        destination: 'http://www.perply.site/:path*',
+      },
     ];
   },
   webpack(config) {
