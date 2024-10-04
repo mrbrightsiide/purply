@@ -1,4 +1,4 @@
-import { theme } from '@/theme/theme.d';
+import { theme } from '@/styles/theme.d';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
