@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { IPlaylistData } from '@/utils/types';
+import { IPlaylistData } from '@/types';
 import { TextInputWithLabel, TextAreaWithLabel } from '../atom/TextInput';
 import { SelectBox } from '../atom/SelectBox';
 import { TextInputLabel } from '../atom/TextInputLabel';

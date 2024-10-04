@@ -2,15 +2,26 @@ import { BasicButton } from '@/components/atom/BasicButton';
 import { colorChips } from '@/components/card/ColorChip';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-// import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Index = () => {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const isMyHome = false;
   const isEmpty = true;
+
+  useEffect(() => {
+    if (session?.user) {
+      console.log('$$$ userId: ', session.user?.id);
+      console.log('$$$ userUuid: ', session.user?.uuid);
+      console.log('$$$ nickname: ', session.user?.nickname);
+      console.log('$$$ profileImage: ', session.user?.profileImage);
+      console.log('$$$ created: ', session.user?.created);
+    }
+  }, [session]);
 
   return (
     <Wrapper>

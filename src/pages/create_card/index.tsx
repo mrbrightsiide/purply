@@ -3,7 +3,7 @@ import { FloatButton } from '@/components/atom/FloatButton';
 import { BackBtnHeader } from '@/components/atom/BackBtnHeader';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { IPlaylistData } from '@/utils/types';
+import { IPlaylistData } from '@/types/types';
 import { CreateForm } from '@/components/card/CreateForm';
 import { ColorChip, colorChips } from '@/components/card/ColorChip';
 
