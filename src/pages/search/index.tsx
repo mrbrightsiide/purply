@@ -9,6 +9,7 @@ import { SearchMusicCard } from '@/components/search/SearchMusicCard';
 import styled from '@emotion/styled';
 import { SearchMusicInput } from '@/components/search/SearchMusicInput';
 import { useRouter } from 'next/router';
+import { ColoredBackground } from '@/components/atom/ColoredBackground';
 
 export default function Search() {
   const router = useRouter();
@@ -35,45 +36,48 @@ export default function Search() {
   const noResult = result?.rss?.channel?.[0]?.total?.[0] === '0';
 
   return (
-    <PageWrapper>
+    <>
       <BackBtnHeader title='음악 검색' />
-      <Space />
-      <SearchMusicInput
-        onChange={(e) => setKeyword(e.target.value)}
-        fetchMusicSearch={() => fetchMusicSearch({ keyword })}
-      />
-      <CenterBox align={noResult || !result ? 'center' : 'flex-start'}>
-        {noResult && (
-          <>
-            <NoResultImg />
-            <CreateMusicTxt>검색 결과가 없습니다</CreateMusicTxt>
-          </>
-        )}
-        <CreateMusicBox>
-          <CreateMusicTxt>노래를 직접 등록하고 싶으신가요?</CreateMusicTxt>
-          <CreateMusicBtn onClick={() => router.push('/search/create')}>
-            <span className='icon'></span>
-            <span className='title'>직접 음악 추가하기</span>
-          </CreateMusicBtn>
-        </CreateMusicBox>
-        <ResultBox>
-          {result?.rss?.channel?.[0]?.item?.map((item: any, idx: any) => (
-            <SearchMusicCard
-              key={idx}
-              item={item}
-              checked={selectedMusic === idx + 1}
-              onChangeCheckBox={() =>
-                setSelectedMusic(selectedMusic === idx + 1 ? null : idx + 1)
-              }
-              openIframe={openIframe === idx}
-              onClickOpenIframe={() =>
-                setOpenIframe(openIframe === idx ? false : idx)
-              }
-            />
-          ))}
-        </ResultBox>
-      </CenterBox>
-      <Space />
+      <ColoredBackground />
+      <PageWrapper>
+        <Space />
+        <SearchMusicInput
+          onChange={(e) => setKeyword(e.target.value)}
+          fetchMusicSearch={() => fetchMusicSearch({ keyword })}
+        />
+        <CenterBox align={noResult || !result ? 'center' : 'flex-start'}>
+          {noResult && (
+            <>
+              <NoResultImg />
+              <CreateMusicTxt>검색 결과가 없습니다</CreateMusicTxt>
+            </>
+          )}
+          <CreateMusicBox>
+            <CreateMusicTxt>노래를 직접 등록하고 싶으신가요?</CreateMusicTxt>
+            <CreateMusicBtn onClick={() => router.push('/search/create')}>
+              <span className='icon'></span>
+              <span className='title'>직접 음악 추가하기</span>
+            </CreateMusicBtn>
+          </CreateMusicBox>
+          <ResultBox>
+            {result?.rss?.channel?.[0]?.item?.map((item: any, idx: any) => (
+              <SearchMusicCard
+                key={idx}
+                item={item}
+                checked={selectedMusic === idx + 1}
+                onChangeCheckBox={() =>
+                  setSelectedMusic(selectedMusic === idx + 1 ? null : idx + 1)
+                }
+                openIframe={openIframe === idx}
+                onClickOpenIframe={() =>
+                  setOpenIframe(openIframe === idx ? false : idx)
+                }
+              />
+            ))}
+          </ResultBox>
+        </CenterBox>
+        <Space />
+      </PageWrapper>
       <FloatButton
         title='선택한 음악 추가하기'
         disabled={!selectedMusic}
@@ -93,15 +97,12 @@ export default function Search() {
           })
         }
       />
-    </PageWrapper>
+    </>
   );
 }
 
 const PageWrapper = styled.div`
   padding: 0 20px;
-  min-height: calc(100vh - 56px);
-  display: flex;
-  flex-direction: column;
   padding-top: 56px;
 `;
 
@@ -165,4 +166,5 @@ const CenterBox = styled.div<{
 
 const ResultBox = styled.div`
   width: 100%;
+  padding-bottom: 80px;
 `;

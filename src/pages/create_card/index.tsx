@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { IPlaylistData } from '@/types';
 import { CreateForm } from '@/components/card/CreateForm';
 import { ColorChip, colorChips } from '@/components/card/ColorChip';
+import { ColoredBackground } from '@/components/atom/ColoredBackground';
 
 const Index = () => {
   const router = useRouter();
@@ -37,43 +38,35 @@ const Index = () => {
   };
 
   return (
-    <BG>
+    <>
+      <BackBtnHeader
+        title='음악 카드 작성'
+        onGoBack={onGoBackHeader}
+        background='#f4f5f5'
+      />
+      <ColoredBackground color='#f4f5f5' />
       <PageWrapper>
-        <BackBtnHeader
-          title='뮤직 카드 작성'
-          onGoBack={onGoBackHeader}
-          background='#f4f5f5'
-        />
         <Tape />
         <ColorChip selectedColor={colorChips[0]} />
         <CreateForm info={info} setInfo={setInfo} />
-        <FloatButton
-          title='뮤직 카드 보내기'
-          disabled={
-            !(info.user_name && info.playlist_id && info.title && info.singer)
-          }
-          onClick={() => {
-            // 카드 생성 API 호출
-            // 카드 생성 성공 시, 카드 보내기 완료 페이지로 이동
-            router.push('/create_card/complete');
-          }}
-        />
       </PageWrapper>
-    </BG>
+      <FloatButton
+        title='음악 카드 보내기'
+        disabled={
+          !(info.user_name && info.playlist_id && info.title && info.singer)
+        }
+        onClick={() => {
+          // 카드 생성 API 호출
+          // 카드 생성 성공 시, 카드 보내기 완료 페이지로 이동
+          router.push('/create_card/complete');
+        }}
+      />
+    </>
   );
 };
 
 const PageWrapper = styled.div`
-  padding: 0 20px 80px 20px;
-  min-height: calc(100vh - 56px);
-`;
-
-const BG = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #f4f5f5;
-  padding-top: 56px;
-  box-shadow: 0px 4px 10px rgba(35, 48, 67, 0.08);
+  padding: 56px 20px 100px 20px;
 `;
 
 const Tape = styled.div`

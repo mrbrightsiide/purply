@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 export const FloatButton = ({
   title,
   disabled,
-  bottomOffset = 10,
+  bottomOffset = 30,
   onClick,
 }: {
   title: string;
@@ -31,7 +31,10 @@ const Button = styled.button<{
 }>`
   position: fixed;
   bottom: ${({ bottomOffset }) => bottomOffset}px;
-  width: calc(100% - 40px);
+  width: inherit;
+  max-width: 335px;
+  align-self: center;
+  justify-self: center;
   height: 52px;
   border-radius: 100px;
   background-color: ${({ theme }) => theme.primary[600]};

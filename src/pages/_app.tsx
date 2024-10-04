@@ -4,12 +4,15 @@ import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/styles/theme.d';
 import '@/styles/globals.css';
 import '@/pages/globals.css';
+import Layout from '@/components/layout';
 
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
     <SessionProvider session={session}>
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </SessionProvider>
   );

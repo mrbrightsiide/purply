@@ -1,4 +1,5 @@
 import { BasicButton } from '@/components/atom/BasicButton';
+import { ColoredBackground } from '@/components/atom/ColoredBackground';
 import { colorChips } from '@/components/card/ColorChip';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -10,7 +11,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 const Index = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const isMyHome = false;
+  const { userName } = router.query as { userName: string };
+  const isMyHome = userName === session?.user?.nickname;
   const isEmpty = true;
 
   useEffect(() => {
@@ -23,14 +25,21 @@ const Index = () => {
     }
   }, [session]);
 
+  useEffect(() => {
+    console.log('$$$ userName: ', userName);
+  }, [userName]);
+
   return (
     <Wrapper>
+      <ColoredBackground color='#141414' />
       <PaddingWrap>
         <Header>{isMyHome ? <span>home</span> : <span>로그인</span>}</Header>
-        <Title>케이팝듣는여우님의{'\n'}뮤직 보관함</Title>
+        <Title>
+          {userName}님의{'\n'}뮤직 보관함
+        </Title>
       </PaddingWrap>
       <Swiper
-        slidesPerView={1.13}
+        slidesPerView={1.14}
         spaceBetween={20}
         slidesOffsetAfter={20}
         slidesOffsetBefore={20}
@@ -92,18 +101,22 @@ const Index = () => {
       </Swiper>
       <PaddingWrap>
         <CardListTitle>
-          받은 뮤직 카드 <span>0개</span>
+          <span>0</span>개의 음악 카드
         </CardListTitle>
         <CardList>
           {isEmpty ? (
             <>
               <Empty>
                 {isMyHome
-                  ? ''
+                  ? '링크를 공유하고 친구에게\n음악카드를 받아보세요'
                   : '친구를 떠올리면 생각나는\n노래를 뮤직 카드에 담아 보내주세요'}
               </Empty>
               <BasicButton
-                text={isMyHome ? '' : '첫 번째로 노래 추천하기'}
+                text={
+                  isMyHome
+                    ? '친구에게 링크 공유하기'
+                    : '첫 번째로 노래 추천하기'
+                }
                 buttonStyle={{ width: '190px' }}
                 onClick={() => router.push('/search')}
               />
@@ -128,9 +141,6 @@ const Title = styled.h1`
 `;
 
 const Wrapper = styled.div`
-  background-color: #141414;
-  height: 100%;
-  min-height: 100vh;
   padding-top: 40px;
 `;
 

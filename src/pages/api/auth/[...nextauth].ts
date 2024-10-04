@@ -56,10 +56,10 @@ export const authOptions = {
       if (account && profile) {
         try {
           const response = await axios.get(
-            'http://www.perply.site/account/kakao/login',
+            'http://www.perply.site/account/kakao/login/',
             {
               params: {
-                token: account.access_token, // 카카오에서 받은 토큰을 사용
+                code: account.access_token, // 카카오에서 받은 토큰을 사용
               },
             }
           );

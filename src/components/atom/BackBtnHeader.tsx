@@ -53,7 +53,7 @@ const Title = styled.p`
 const Wrapper = styled.div<{
   background?: string;
 }>`
-  width: 100%;
+  width: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,8 +61,9 @@ const Wrapper = styled.div<{
   padding: 14px 0;
   height: calc(56px - 14px * 2);
   position: fixed;
-  margin-left: -20px;
   background-color: ${({ background }) => (background ? background : 'white')};
   top: 0;
   height: 56px;
+  z-index: 100;
+  color: #111;
 `;

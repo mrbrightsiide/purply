@@ -1,5 +1,6 @@
 'use client';
 import { BasicButton } from '@/components/atom/BasicButton';
+import { ColoredBackground } from '@/components/atom/ColoredBackground';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import {
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <Wrapper>
+      <ColoredBackground color='#141414' />
       <span
         css={css`
           font-size: 40px;
@@ -70,8 +72,6 @@ export default function Home() {
 }
 
 const Wrapper = styled.div`
-  background-color: #141414;
-  min-height: 100vh;
   border-radius: 0px;
   padding: 47px 33px 0 33px;
 

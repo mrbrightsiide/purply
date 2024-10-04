@@ -1,4 +1,5 @@
 import { BackBtnHeader } from '@/components/atom/BackBtnHeader';
+import { ColoredBackground } from '@/components/atom/ColoredBackground';
 import { TextInputWithLabel } from '@/components/atom/TextInput';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
@@ -29,27 +30,30 @@ const Index = () => {
   };
 
   return (
-    <PageWrapper>
+    <>
       <BackBtnHeader
         title='음악 직접 등록'
         subContent={<SaveIco onClick={handleSaveClick}>저장</SaveIco>}
       />
-      <Icon></Icon>
-      <LabelWrapper>
-        <TextInputWithLabel
-          label='노래 제목'
-          onChangeInput={(e) => setTitle(e.target.value)}
-          placeholder='노래 제목을 입력하세요'
-          value={title}
-        />
-        <TextInputWithLabel
-          label='가수 이름'
-          placeholder='가수 이름을 입력하세요'
-          onChangeInput={(e) => setSinger(e.target.value)}
-          value={singer}
-        />
-      </LabelWrapper>
-    </PageWrapper>
+      <PageWrapper>
+        <ColoredBackground />
+        <Icon></Icon>
+        <LabelWrapper>
+          <TextInputWithLabel
+            label='노래 제목'
+            onChangeInput={(e) => setTitle(e.target.value)}
+            placeholder='노래 제목을 입력하세요'
+            value={title}
+          />
+          <TextInputWithLabel
+            label='가수 이름'
+            placeholder='가수 이름을 입력하세요'
+            onChangeInput={(e) => setSinger(e.target.value)}
+            value={singer}
+          />
+        </LabelWrapper>
+      </PageWrapper>
+    </>
   );
 };
 

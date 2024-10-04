@@ -20,6 +20,7 @@ const Label = styled.label`
   font-size: 14px;
   margin-bottom: 12px;
   font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+  color: #111;
 
   span {
     font-size: 15px;

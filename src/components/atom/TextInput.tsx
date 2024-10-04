@@ -39,7 +39,6 @@ export const TextInputWithLabel = ({
   isOptional?: boolean;
   value: string;
   inputStyle?: React.CSSProperties;
-  isTextArea?: boolean;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -80,7 +79,6 @@ export const TextAreaWithLabel = ({
   isOptional?: boolean;
   value: string;
   inputStyle?: React.CSSProperties;
-  isTextArea?: boolean;
 }) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -128,6 +126,7 @@ const TextArea = styled.textarea`
   font-size: 14px;
   font-weight: ${({ theme }) => theme.fontWeight.regular};
   color: ${({ theme }) => theme.line.black};
+  background-color: #fff;
   &:focus {
     outline: none;
   }

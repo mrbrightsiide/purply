@@ -49,5 +49,6 @@ const SearchInput = styled.div`
 
   input {
     width: 100%;
+    color: #111;
   }
 `;
