@@ -2,15 +2,16 @@
 import { BasicButton } from '@/components/atom/BasicButton';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-// import {
-//   // signIn,
-//   // useSession,
-// } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import {
+  signIn,
+  signOut,
+  // useSession,
+} from 'next-auth/react';
+// import { useRouter } from 'next/navigation';
 // import { useEffect } from 'react';
 
 export default function Home() {
-  const router = useRouter();
+  // const router = useRouter();
   // const { data: session } = useSession();
 
   // useEffect(() => {
@@ -44,9 +45,10 @@ export default function Home() {
           margin: 114px 0 71px 0;
         `}
       />
+      <BasicButton text='로그아웃' onClick={() => signOut()} />
       <BasicButton
-        // onClick={() => signIn()}
-        onClick={() => router.push('/my_home')}
+        onClick={() => signIn('kakao')}
+        // onClick={() => router.push('/my_home')}
         text='카카오 로그인'
         icon={
           <img
